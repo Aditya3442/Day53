@@ -1,0 +1,17 @@
+class Solution {
+    public int subarraysDivByK(int[] nums, int k) {
+        HashMap<Integer,Integer> mpp=new HashMap<>();
+        int prefixSum=0;
+        int count=0;
+        mpp.put(0,1);
+        for(int i=0;i<nums.length;i++){
+            prefixSum+=nums[i];
+            int x=((prefixSum%k)+k)%k;
+            if(mpp.containsKey(x)){
+                count+=mpp.get(x);
+            }
+            mpp.put(x,mpp.getOrDefault(x,0)+1);
+        }
+        return count;
+    }
+}
